@@ -1,0 +1,53 @@
+{
+  "exp_id": "amos_test_fedavgm",
+  "num_users": 9,
+  "num_collaborators": 1,
+  "comm": {
+    "type": "MPI",
+    "synchronous": true
+  },
+  "dset": {
+    "0": "amos",
+    "1": "amos",
+    "2": "amos",
+    "3": "amos",
+    "4": "amos",
+    "5": "amos",
+    "6": "amos",
+    "7": "amos",
+    "8": "amos",
+    "9": "amos"
+  },
+  "dpath": {
+    "flare": "./datasets/imgs/flare/",
+    "brats": "./datasets/imgs/brats/",
+    "kits": "./datasets/imgs/kits/",
+    "amos": "./datasets/imgs/amos/"
+  },
+  "seed": 42,
+  "model": "resnet18",
+  "samples_per_user": 50,
+  "train_label_distribution": "iid",
+  "test_partition": "equal",
+  "batch_size": 32,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "rounds": 50,
+  "local_epochs": 1,
+  "optimizer": "adam",
+  "selected_gpus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "hostname_to_device_ids": {
+    "localhost": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "momentum": 0.9
+}

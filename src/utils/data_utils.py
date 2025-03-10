@@ -102,6 +102,15 @@ def get_dataset(dname: str, dpath: str):
         module = importlib.import_module(module_path)
         dataset_class = getattr(module, class_name)
         return dataset_class(dpath, dname_parts[1])
+    elif dname == "wilds_camelyon17":
+        from data_loaders.wilds import WildsDataset
+        return WildsDataset("camelyon17", dpath, domain)
+    elif dname == "isic":
+        from data_loaders.isic import ISICDatasetWrapper
+        return ISICDatasetWrapper(dpath)
+    elif dname == "chestxray":
+        from data_loaders.chestxray import ChestXrayDatasetWrapper
+        return ChestXrayDatasetWrapper(dpath)
     elif dname not in dset_mapping:
         raise ValueError(f"Unknown dataset name: {dname}")
     else:

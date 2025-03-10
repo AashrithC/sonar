@@ -22,6 +22,11 @@ This dataset is just like the CIFAR-10, except it has 100 classes containing 600
 ### Medical MNIST
 This dataset consists of 60,000 28x28 grayscale images of 10 classes (6,000 images per class). The images show different medical conditions, such as pneumonia, emphysema, and cardiomegaly. This dataset is used for lightweight medical image classification tasks. The dataset supports several different biomedical imaging modalities, including X-ray, CT, Histopathology, etc.
 
+### ISIC (International Skin Imaging Collaboration)
+The ISIC dataset contains dermoscopic images for skin lesion analysis. It includes over 25,000 images across 8 different diagnostic categories: Melanoma, Melanocytic nevus, Basal cell carcinoma, Actinic keratosis, Benign keratosis, Dermatofibroma, Vascular lesion, and Squamous cell carcinoma. The dataset is widely used for developing and evaluating algorithms for automated diagnosis of skin cancer and other skin conditions. Images are high-resolution and come from different clinical centers, providing diversity in imaging equipment and techniques.
+
+### ChestX-ray14
+The ChestX-ray14 dataset (also known as ChestX-ray8 in its earlier version) is a large-scale dataset of chest X-rays with 14 different disease labels. It contains over 100,000 frontal-view chest X-ray images from more than 30,000 unique patients. The 14 disease categories include: Atelectasis, Cardiomegaly, Effusion, Infiltration, Mass, Nodule, Pneumonia, Pneumothorax, Consolidation, Edema, Emphysema, Fibrosis, Pleural Thickening, and Hernia. This dataset is particularly valuable for developing multi-label classification models for chest X-ray interpretation and can be used to simulate real-world clinical scenarios where multiple conditions may be present simultaneously.
 
 ## Object Detection
 

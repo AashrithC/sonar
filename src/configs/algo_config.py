@@ -331,5 +331,31 @@ malicious_algo_config_list: List[ConfigType] = [
     malicious_traditional_model_update_attack,
 ]
 
-default_config_list: List[ConfigType] = [traditional_fl]
-# default_config_list: List[ConfigType] = [fedstatic, fedstatic, fedstatic, fedstatic]
+# Add algorithm configurations for ISIC and ChestX-ray14 datasets
+fedavg_isic: ConfigType = {
+    "algo": "fedavg",
+    "exp_type": "isic_classification",
+    # Learning setup
+    "epochs": 20,
+    "model": "resnet18",
+    "model_lr": 1e-3,
+    "batch_size": 32,
+}
+
+fedavg_chestxray: ConfigType = {
+    "algo": "fedavg",
+    "exp_type": "chestxray_classification",
+    # Learning setup
+    "epochs": 20,
+    "model": "resnet18",
+    "model_lr": 1e-3,
+    "batch_size": 32,
+}
+
+# Add the new configurations to the default config list
+default_config_list = [
+    traditional_fl,
+    fedavg_object_detect,
+    fedavg_isic,  # Add ISIC dataset configuration
+    fedavg_chestxray,  # Add ChestX-ray14 dataset configuration
+]

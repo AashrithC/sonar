@@ -139,6 +139,22 @@ def get_camelyon17_support(num_users: int, domains: List[int] = CAMELYON17_DMN):
     return get_domain_support(num_users, "wilds_camelyon17", domains)
 
 
+# ISIC dataset domains (can be based on different lesion types or acquisition centers)
+ISIC_DMN = ["center1", "center2", "center3"]
+
+
+def get_isic_support(num_users: int, domains: List[str] = ISIC_DMN):
+    return get_domain_support(num_users, "isic", domains)
+
+
+# ChestX-ray14 dataset domains (can be based on different hospitals or acquisition devices)
+CHESTXRAY_DMN = ["hospital1", "hospital2", "hospital3"]
+
+
+def get_chestxray_support(num_users: int, domains: List[str] = CHESTXRAY_DMN):
+    return get_domain_support(num_users, "chestxray", domains)
+
+
 DIGIT_FIVE_2 = ["svhn", "mnist_m"]
 DIGIT_FIVE = ["svhn", "mnist_m", "synth_digits"]
 DIGIT_FIVE_5 = ["mnist", "usps", "svhn", "mnist_m", "synth_digits"]
@@ -154,6 +170,19 @@ digit_five_dpath = {
     "svhn": "./imgs/svhn",
     "mnist_m": "./imgs/MNIST-M",
     "synth_digits": "./imgs/syn_digit",
+}
+
+# Add paths for the new datasets
+isic_dpath = {
+    "isic_center1": "./datasets/imgs/isic/",
+    "isic_center2": "./datasets/imgs/isic/",
+    "isic_center3": "./datasets/imgs/isic/",
+}
+
+chestxray_dpath = {
+    "chestxray_hospital1": "./datasets/imgs/chestxray/",
+    "chestxray_hospital2": "./datasets/imgs/chestxray/",
+    "chestxray_hospital3": "./datasets/imgs/chestxray/",
 }
 
 CIFAR10_DSET = "cifar10"
@@ -381,3 +410,44 @@ grpc_system_config_gia: ConfigType = {
 
 current_config = grpc_system_config
 # current_config = mpi_system_config
+
+# Add new system configurations for ISIC and ChestX-ray14 datasets
+isic_system_config: ConfigType = {
+    "exp_id": "",
+    "comm": {"type": "MPI"},
+    "seed": 1,
+    "num_collaborators": NUM_COLLABORATORS,
+    "load_existing": False,
+    "dump_dir": DUMP_DIR,
+    "device_ids": get_device_ids(num_users=3, gpus_available=[0, 1]),
+    "algo": get_algo_configs(num_users=3, algo_configs=default_config_list),  # type: ignore
+    # Dataset params
+    "dset": get_isic_support(3),
+    "dpath": isic_dpath,
+    "train_label_distribution": "iid",  # Either "iid", "shard" "support",
+    "test_label_distribution": "iid",  # Either "iid" "support",
+    "samples_per_user": 256,
+    "test_samples_per_class": 100,
+    "community_type": "dataset",
+    "exp_keys": [],
+}
+
+chestxray_system_config: ConfigType = {
+    "exp_id": "",
+    "comm": {"type": "MPI"},
+    "seed": 1,
+    "num_collaborators": NUM_COLLABORATORS,
+    "load_existing": False,
+    "dump_dir": DUMP_DIR,
+    "device_ids": get_device_ids(num_users=3, gpus_available=[0, 1]),
+    "algo": get_algo_configs(num_users=3, algo_configs=default_config_list),  # type: ignore
+    # Dataset params
+    "dset": get_chestxray_support(3),
+    "dpath": chestxray_dpath,
+    "train_label_distribution": "iid",  # Either "iid", "shard" "support",
+    "test_label_distribution": "iid",  # Either "iid" "support",
+    "samples_per_user": 256,
+    "test_samples_per_class": 100,
+    "community_type": "dataset",
+    "exp_keys": [],
+}
